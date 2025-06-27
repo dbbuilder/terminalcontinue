@@ -1,0 +1,118 @@
+# Terminal Continue Monitor Configuration
+# Copy this file to config.yaml and modify as needed
+
+# Target process names to monitor
+# These are the executable names that the monitor will watch
+target_processes:
+  - "cmd.exe"
+  - "powershell.exe"
+  - "WindowsTerminal.exe"
+
+# Inactivity threshold in seconds
+# How long a terminal must be unchanged before sending keystrokes
+inactivity_threshold_seconds: 30
+
+# Keystrokes to send to inactive terminals
+# Use special key codes like {ENTER}, {TAB}, {SPACE}, etc.
+# Multiple commands can be separated by spaces
+keys_to_send: "continue{ENTER}"
+
+# Polling interval in seconds
+# How often to check window states (lower = more responsive, higher = less CPU)
+polling_interval_seconds: 5
+
+# Logging configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+  
+  # Log file configuration
+  file:
+    enabled: true
+    path: "logs/terminal_monitor.log"
+    max_size_mb: 10
+    backup_count: 5
+  
+  # Console logging configuration
+  console:
+    enabled: true
+    colored: true
+
+# Advanced settings
+advanced:
+  # Maximum number of windows to monitor simultaneously
+  max_windows: 50
+  
+  # Timeout for window operations in seconds
+  window_operation_timeout: 5
+  
+  # Retry attempts for failed operations
+  retry_attempts: 3
+  
+  # Delay between retry attempts in seconds
+  retry_delay: 1
+  
+  # Enable hash-based change detection optimization
+  use_hash_optimization: true
+  
+  # Text sample size for hash calculation (0 = full text)
+  hash_sample_size: 1000
+
+# Process-specific overrides
+# Override settings for specific process types
+process_overrides:
+  "cmd.exe":
+    inactivity_threshold_seconds: 45
+    keys_to_send: "echo continue{ENTER}"
+  
+  "powershell.exe":
+    inactivity_threshold_seconds: 30
+    keys_to_send: "Write-Host 'continue'{ENTER}"
+  
+  "WindowsTerminal.exe":
+    inactivity_threshold_seconds: 25
+    keys_to_send: "continue{ENTER}"
+
+# Exclusion rules
+exclusions:
+  # Window titles to exclude from monitoring (partial matches)
+  window_titles:
+    - "Administrator:"
+    - "Elevated"
+  
+  # Process command lines to exclude (partial matches)
+  command_lines:
+    - "ssh"
+    - "telnet"
+    - "ftp"
+
+# Notification settings
+notifications:
+  # Enable desktop notifications
+  desktop_notifications: false
+  
+  # Enable email notifications (requires SMTP configuration)
+  email_notifications: false
+  
+  # SMTP configuration for email notifications
+  smtp:
+    server: "smtp.gmail.com"
+    port: 587
+    username: ""
+    password: ""
+    from_address: ""
+    to_addresses: []
+
+# Performance monitoring
+performance:
+  # Enable performance monitoring
+  enabled: true
+  
+  # Log performance metrics interval in seconds
+  metrics_interval: 300
+  
+  # CPU usage warning threshold percentage
+  cpu_warning_threshold: 10
+  
+  # Memory usage warning threshold in MB
+  memory_warning_threshold: 100

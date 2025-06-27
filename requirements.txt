@@ -1,0 +1,24 @@
+# Terminal Continue Monitor - Python Dependencies
+# Core Windows UI Automation
+pywinauto==0.6.8
+
+# Windows API Access
+pywin32==306
+
+# Configuration File Support
+PyYAML==6.0.1
+
+# Enhanced Logging (Optional but recommended)
+colorlog==6.7.0
+
+# Development and Testing Dependencies (Optional)
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Build and Distribution (Optional)
+setuptools==69.0.2
+wheel==0.42.0
+pyinstaller==6.2.0
